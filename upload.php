@@ -19,6 +19,10 @@
     }
 
     function insertLabel($id, $customername, $labelname, $originallabelname) {
+        if (empty($customername) || strlen($customername) < 2) {
+            $customername = 'Onbekend';
+        }
+
         $currentdatetime = getCurrentDateTime();
 
         $db = new PDO('mysql:host=localhost;dbname=laprint', 'root', '');
@@ -57,17 +61,24 @@
                     $fileDestination = 'uploads/'.$fileNameNew;
                     move_uploaded_file($fileTmpName, $fileDestination);
 
+
+
                     insertLabel(getNumberOfLabels(), $_POST["customername"], $fileNameNew, $fileName);
 
-                    header("Location: index.php");
+                    echo "<script>alert('Uw bestand is geüpload.')</script>";
+                    header("Refresh: 1; url=index.php");
                 } else {
-                    echo "Je bestand is te groot.";
+                    $SizeInMB = $fileSize / 1000000;
+                    echo "<script>alert('Bestand is te groot, $SizeInMB MB. De maximale bestandsgrootte is 100 MB.')</script>";
+                    header("Refresh: 1; url=index.php");
                 }
             } else {
-                echo "Er is iets fout gegaan.";
+                echo "<script>alert('Er is iets fout gegaan bij het uploaden van het bestand.')</script>";
+                header("Refresh: 1; url=index.php");
             }
         } else {
-            echo "Je hebt geen geldig bestand gekozen.";
+            echo "<script>alert('Het bestandstype $fileType is ongeldig.')</script>";
+            header("Refresh: 1; url=index.php");
         }
     }
 ?>

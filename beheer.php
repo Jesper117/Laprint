@@ -25,7 +25,7 @@ if( isset($_POST["loguit"]) ) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/beheer.css">
+    <link rel="stylesheet" href="css/beheer1.css">
 
     <script src="js/print.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -55,14 +55,21 @@ if( isset($_POST["loguit"]) ) {
                 <span class="table-title">LabelPrint Beheer</span>
                 <div class="actions">
                     <a href="beheer.php" class="search-toggle waves-effect btn-flat nopadding">
-                        <img height="40" width="auto" src="img/refresh.png" class="refreshbtn">
+                        <img height="40" width="auto" src="img/refresh.png">
                     </a>
 
-                    <form action="" method="POST">
-                        <button name="loguit" class="search-toggle waves-effect btn-flat nopadding">
-                            <i class="material-icons">Uitloggen</i>
+                    <form action="clearlabels.php" method="POST">
+                        <button type="submit" name="deletetable" class="search-toggle waves-effect btn-flat nopadding">
+                            <img height="40" width="auto" src="img/delete.png" class="printbtn">
                         </button>
                     </form>
+
+                    <form action="" method="POST">
+                        <button type="submit" name="loguit" class="search-toggle waves-effect btn-flat nopadding">
+                            <img height="40" width="auto" src="img/logout.png" class="printbtn">
+                        </button>
+                    </form>
+
 
                 </div>
             </div>
