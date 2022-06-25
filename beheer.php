@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if( !isset($_SESSION["id"]) ) {
+    header('Location: login.php');
+}
+if( isset($_POST["loguit"]) ) {
+    session_destroy();
+    header('Location: login.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -15,7 +27,22 @@
 
     <link rel="stylesheet" href="css/beheer.css">
 
-    <title>LabelPrint</title>
+    <script src="js/print.js"></script>
+
+    <!-- No X-overflow and a print button border fix. -->
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .printbtn {
+            border: none;
+            outline: none;
+        }
+    </style>
+
+
+    <title>LabelPrint Beheer</title>
     <link rel="icon" href="img/upload.png">
 </head>
 <body>
@@ -26,7 +53,16 @@
             <div class="table-header">
                 <span class="table-title">LabelPrint Beheer</span>
                 <div class="actions">
-                    <a href="index.php" class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">Naar LabelPrint</i></a>
+                    <a href="beheer.php" class="search-toggle waves-effect btn-flat nopadding">
+                        <img height="40" width="auto" src="img/refresh.png" class="refreshbtn">
+                    </a>
+
+                    <form action="" method="POST">
+                        <button name="loguit" class="search-toggle waves-effect btn-flat nopadding">
+                            <i class="material-icons">Uitloggen</i>
+                        </button>
+                    </form>
+
                 </div>
             </div>
             <table id="datatable">
@@ -38,21 +74,52 @@
                     <th>Label</th>
                 </tr>
                 </thead>
+
                 <tbody>
-                <tr>
 
-                    <td>1</td>
-                    <td>Jesper Minks</td>
-                    <td>25-06-2022</td>
-                    <td>
-                        <a href="http://example.com">
-                            <div style="height:50%;width:100%">
-                                Label.pdf
-                            </div>
-                        </a>
-                    </td>
+                    <?php
+                    // this function gets all 'labels' from the database 'laprint' and prints them in a table
+                    function getLabels()
+                    {
+                        $conn = new mysqli("localhost", "root", "", "laprint");
+                        $sql = "SELECT * FROM labels ORDER BY id DESC";
+                        $result = $conn->query($sql);
 
-                </tr>
+                        // if there are no labels in the database, print a message
+                        if ($result->num_rows == 0) {
+                            echo "
+                                <tr>
+                                    <td>-</td>
+                                    <td>Geen labels om te printen.</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+                        ";
+                        } else {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "
+                                <tr>
+                                    <td>$row[id]</td>
+                                    <td>$row[customername]</td>
+                                    <td>$row[creationdatetime]</td>
+                                    <td>
+                                        <button class='printbtn' onclick='printJS(`laprint/uploads/$row[label]`);' href='#'>
+                                            <div style='height:50%;width:100%'>
+                                                    $row[originallabelname]
+                                            </div>
+                                        </button>
+                                    </td>
+                                    
+                                </tr>
+                                ";
+                            }
+                        }
+                        $conn->close();
+                    }
+
+                    getLabels();
+                    ?>
+
                 </tbody>
             </table>
         </div>
