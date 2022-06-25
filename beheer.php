@@ -28,6 +28,7 @@ if( isset($_POST["loguit"]) ) {
     <link rel="stylesheet" href="css/beheer.css">
 
     <script src="js/print.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- No X-overflow and a print button border fix. -->
     <style>
@@ -103,7 +104,13 @@ if( isset($_POST["loguit"]) ) {
                                     <td>$row[customername]</td>
                                     <td>$row[creationdatetime]</td>
                                     <td>
-                                        <button class='printbtn' onclick='printJS(`laprint/uploads/$row[label]`);' href='#'>
+                                        <button class='printbtn' onclick='
+                                        var Url = `uploads/$row[label]`;
+                                        console.log(Url);
+                                        var printWindow = window.open(Url, `_blank`);
+                                        printWindow.print();
+                                        
+                                        ' href='#'>
                                             <div style='height:50%;width:100%'>
                                                     $row[originallabelname]
                                             </div>
