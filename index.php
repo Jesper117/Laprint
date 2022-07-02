@@ -13,34 +13,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/upload.css">
+    <link rel="stylesheet" href="css/upload1.css">
 
     <title>LabelPrint</title>
     <link rel="icon" href="img/upload.png">
 </head>
 <body>
 
-<a href="login.php">
-    <img  class="center-block aalogo" width="200" height="auto" src="img/aacomputerslogo.jpg">
-</a>
 
-<div class="text-center">
-    <label class="titletext">Welkom bij LabelPrint.</label> <br>
-    <label class="infotext">Upload uw label via de onderstaande knop en wij printen het voor u uit.</label> <br>
-    <label class="infotext">Standaard kosten zijn €0,50 per label.</label>
-</div>
 
 <form action="upload.php" method="POST" enctype="multipart/form-data">
-    <div class="text-center">
+    <!--<div class="text-center">
         <label class="infotext nameinputinfo">Voer uw naam in.</label> <br>
         <input type="text" name="customername" id="customername" class="nameinput" maxlength="25">
-    </div>
+    </div>-->
 
     <div class="wrapper">
 
         <div class="file-upload">
             <input type="file" name="uploadfile" id="uploadfile" onchange="this.form.submit();" />
-            <img class="uploadimg" width="150" height="150" src="img/upload.png">
+            <img class="uploadimg" width="300" height="300" src="img/uploadimg.png">
         </div>
     </div>
 </form>
@@ -52,6 +44,13 @@
         <img width="40" height="auto" src="img/github.png">
     </a>
 </div>
+
+<br>
+<br>
+
+<a href="login.php">
+    <img  class="center-block aalogo" width="200" height="auto" src="img/aacomputerslogo.jpg">
+</a>
 
 </body>
 </html>

@@ -78,7 +78,7 @@ if( isset($_POST["loguit"]) ) {
                 <tr>
                     <th>#</th>
                     <th>Naam</th>
-                    <th>Datum en tijd van toevoeging</th>
+                    <th>Tijd van toevoeging</th>
                     <th>Label</th>
                 </tr>
                 </thead>
@@ -105,11 +105,14 @@ if( isset($_POST["loguit"]) ) {
                         ";
                         } else {
                             while ($row = $result->fetch_assoc()) {
+
+                                $time = substr($row['creationdatetime'], 11, 5);
+
                                 echo "
                                 <tr>
                                     <td>$row[id]</td>
                                     <td>$row[customername]</td>
-                                    <td>$row[creationdatetime]</td>
+                                    <td>$time</td>
                                     <td>
                                         <button class='printbtn' onclick='
                                         var Url = `uploads/$row[label]`;

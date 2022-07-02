@@ -63,7 +63,8 @@
 
 
 
-                    insertLabel(getNumberOfLabels(), $_POST["customername"], $fileNameNew, $fileName);
+                    $customername = "Onbekend";
+                    insertLabel(getNumberOfLabels(), $customername, $fileNameNew, $fileName);
 
                     echo "<script>alert('Uw bestand is geüpload.')</script>";
                     header("Refresh: 1; url=index.php");
